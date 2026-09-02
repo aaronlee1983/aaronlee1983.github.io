@@ -4,33 +4,128 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LifeTies</title>
+<meta name="description" content="Your life on one grid, one square per week. Add parents, partner, children — see your shared time. Everything stays on your device.">
 <style>
-  body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; max-width: 640px; margin: 0 auto; padding: 48px 20px; text-align: center; line-height: 1.6; color: #2c2c2a; background: #FFF8EE; }
-  .logo { width: 72px; height: 72px; border-radius: 16px; background: #D85A30; display: inline-flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 700; color: #fff; margin-bottom: 16px; }
-  h1 { font-size: 32px; margin: 8px 0; color: #633806; }
-  .tagline { color: #8b6238; font-size: 17px; margin-bottom: 32px; }
-  .card { background: #fff; border: 1px solid #E8D9C0; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
-  .btn { display: inline-block; background: #D85A30; color: #fff; padding: 12px 28px; border-radius: 24px; text-decoration: none; font-weight: 500; }
-  .links a { color: #A85A2E; text-decoration: none; margin: 0 12px; }
-  .muted { color: #999; font-size: 13px; margin-top: 40px; }
+  :root {
+    --bg: #FFF8EE;
+    --ink: #2c2c2a;
+    --ink-muted: #8b6238;
+    --accent: #D85A30;
+    --accent-deep: #A85A2E;
+    --border: #E8D9C0;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 640px; margin: 0 auto; padding: 48px 20px 32px; text-align: center; line-height: 1.6; color: var(--ink); background: var(--bg); }
+  .logo { width: 72px; height: 72px; border-radius: 18px; background: var(--accent); display: inline-flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 700; color: #fff; margin-bottom: 16px; box-shadow: 0 4px 16px rgba(216,90,48,0.18); }
+  h1 { font-size: 32px; margin: 8px 0; color: #633806; font-weight: 600; letter-spacing: -0.5px; }
+  .tagline { color: var(--ink-muted); font-size: 17px; margin-bottom: 28px; }
+  .badge { display: inline-block; background: #FCEBEB; color: #791F1F; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 500; margin-bottom: 24px; letter-spacing: 0.3px; }
+  .card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px 20px; margin-bottom: 16px; text-align: left; }
+  .card p { margin: 0 0 12px; }
+  .card p:last-child { margin-bottom: 0; }
+  .card strong { color: #633806; }
+  .features { display: grid; gap: 10px; margin-bottom: 24px; text-align: left; }
+  .feat { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; font-size: 14px; }
+  .feat .dot { display: inline-block; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; padding: 14px 32px; border-radius: 28px; text-decoration: none; font-weight: 600; font-size: 15px; transition: transform 0.15s; box-shadow: 0 4px 12px rgba(216,90,48,0.22); }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-secondary { display: inline-block; background: transparent; color: var(--accent-deep); padding: 12px 24px; border-radius: 24px; text-decoration: none; font-weight: 500; margin-left: 8px; }
+  .cta-row { margin: 28px 0 16px; }
+  .links { margin-top: 28px; font-size: 13px; }
+  .links a { color: var(--accent-deep); text-decoration: none; margin: 0 12px; }
+  .links a:hover { text-decoration: underline; }
+  .muted { color: #999; font-size: 12px; margin-top: 36px; }
+  .footer-note { color: #A85A2E; font-size: 13px; margin-top: 8px; }
+  @media (max-width: 480px) { body { padding: 32px 16px; } h1 { font-size: 26px; } }
 </style>
 </head>
 <body>
+
 <div class="logo">L</div>
 <h1>LifeTies</h1>
 <div class="tagline">See every year of your life on one grid.</div>
 
+<!-- 阶段标记（动态 JS 更新）-->
+<div id="phase-badge" class="badge" style="display:none;">CLOSED BETA · Android only</div>
+
 <div class="card">
-  <p><strong>Quietly make today count.</strong> Your life on one grid, your relationships, wishes and milestones — all stored privately on your device. No account, no servers, no tracking.</p>
+  <p><strong>Quietly make today count.</strong> Your life on one grid, your relationships, wishes and milestones — all stored privately on your device.</p>
+  <p style="color:#666; font-size:14px; margin:0;">No account. No servers. No tracking.</p>
 </div>
 
-<a class="btn" href="https://play.google.com/store/apps/details?id=app.yourapps.lifeties">Get it on Google Play</a>
+<div class="features">
+  <div class="feat"><span class="dot"></span>Life grid — one square per week, ages 0–90</div>
+  <div class="feat"><span class="dot"></span>Add parents, partner, children — see shared time</div>
+  <div class="feat"><span class="dot"></span>Daily thoughts, wishes, milestone journal</div>
+  <div class="feat"><span class="dot"></span>100% offline. Your data never leaves your phone</div>
+</div>
+
+<div class="cta-row">
+  <!-- 测试期：所有 CTA 都指向"加入封闭测试" -->
+  <a id="primary-cta" class="btn" href="#">Join Closed Beta on Android</a>
+</div>
+
+<p class="footer-note" id="footer-note">Currently in private beta · 14-day preview · $19.99/yr after trial</p>
 
 <div class="links">
   <a href="/terms.html">Terms of Service</a>
   <a href="/privacy.html">Privacy Policy</a>
 </div>
 
-<p class="muted">© 2026 LifeTies</p>
+<p class="muted">© 2026 LifeTies · Made with care</p>
+
+<script>
+  // ============================================================
+  // 配置：所有跳转目标集中在这里，改一处即可切换阶段
+  // ============================================================
+  var PHASE = 'closed_beta';  // ← 上线后改成 'released'
+  var URLS = {
+    closed_beta: 'https://play.google.com/apps/testing/com.yourapps.lifeties',
+    released:    'https://play.google.com/store/apps/details?id=com.yourapps.lifeties'
+  };
+  var COPY = {
+    closed_beta: {
+      btn:   'Join Closed Beta on Android',
+      badge: 'CLOSED BETA · Android only',
+      note:  'Currently in private beta · 14-day preview · $19.99/yr after trial'
+    },
+    released: {
+      btn:   'Get LifeTies on Google Play',
+      badge: '',
+      note:  'Free 7-day trial · $19.99/year · Cancel anytime'
+    }
+  };
+
+  var url = URLS[PHASE];
+  var copy = COPY[PHASE];
+
+  // 设置按钮和文案
+  var btn = document.getElementById('primary-cta');
+  if (btn) btn.setAttribute('href', url);
+  if (btn) btn.textContent = copy.btn;
+
+  var badge = document.getElementById('phase-badge');
+  if (badge && copy.badge) {
+    badge.textContent = copy.badge;
+    badge.style.display = 'inline-block';
+  } else if (badge) {
+    badge.style.display = 'none';
+  }
+
+  var note = document.getElementById('footer-note');
+  if (note) note.textContent = copy.note;
+
+  // Android 扫码用户：自动跳到 Play（测试期跳"加入测试"，正式期跳"详情页"）
+  (function () {
+    var ua = navigator.userAgent || '';
+    if (/Android/i.test(ua)) {
+      // 给用户看到 CTA 的时间，再跳转（800ms）
+      setTimeout(function () {
+        window.location.replace(url);
+      }, 800);
+    }
+  })();
+</script>
+
 </body>
 </html>
